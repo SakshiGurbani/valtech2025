@@ -1,0 +1,11 @@
+select * from employee;
+
+create table dept ( id int primary key,name varchar(60),location varchar(50));
+insert into dept(id,name,location) values(1,'HR','AMD'),(2,'HR','BLR');
+select * from dept;
+
+alter table employee add column deptId int,add constraint fk_id foreign key(deptId) references dept(id);
+
+update employee set deptId=1 where id=1;
+update employee set deptId=2 where id=11;
+update employee set deptId=1 where id=5;
