@@ -91,10 +91,8 @@ Current Department =${current}
     	      <td><%=emp.getExperience() %></td>
     	       <td><%=emp.getLevel() %></td>
     	        <td><%=emp.getDeptId() %></td>
-    	       </tr> 
-    	  
-    	  
-      <% }%>
+    	       </tr>    
+   <% }%>
       
        
      </table>

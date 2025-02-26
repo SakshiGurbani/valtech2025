@@ -9,7 +9,7 @@ class DeptDAOImplTest {
 	
 	@Test
 	void testInsert() {
-	DeptDAO dao=new DeptDAOImpl();
+	DeptDAO dao=new DeptDAOImpl(null);
 //	 dao.save(new Dept(3,"ACC","HYD"));
 //	Dept d=new Dept(3,"ACC","BLR");
 //	dao.update(d);

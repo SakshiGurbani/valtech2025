@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:beans xmlns:p="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans-3.2.xsd ">
+
+ <p:bean class="practicSpr.Child" name="child">
+ <p:property name="id" value="1"></p:property>
+ <p:property name="name" value="Sakshi"></p:property>
+ <p:property name="place" value="Jaipur"></p:property>
+ </p:bean>
+ 
+ 
+ <p:bean class="practicSpr.Emp" name="employee">
+   <p:property name="ename" value="Yashi"></p:property>
+   
+   <p:property name="phones">
+   <p:list>
+     <p:value >34566</p:value>
+      <p:value >366</p:value>
+       <p:value >3645</p:value>
+   </p:list>
+   </p:property>
+   
+   <p:property name="address">
+    <p:set>
+      <p:value>Delhi</p:value>
+       <p:value>Gurgoan</p:value>
+       <p:value>Jaipur</p:value>
+    </p:set>
+   </p:property>
+   
+   
+   <p:property name="course">
+    <p:map>
+    <p:entry key="java" value="2months"></p:entry>
+    <p:entry key="c" value="1months"></p:entry>
+    <p:entry key="c++" value="4months"></p:entry>
+    </p:map>
+   </p:property>
+   
+   <p:property name="props">
+   <p:props>
+     <p:prop key="Cutesttttt "> Sakshi</p:prop>
+     <p:prop key="Pagal/Bevkoof "> Mr</p:prop>
+   </p:props>
+   </p:property>
+ </p:bean>
+ 
+ 
+ <p:bean class="practicSpr.B" name="bref">
+ <p:property name="y" value="100"></p:property>
+ </p:bean>
+ 
+ <p:bean class="practicSpr.A" name="aref">
+  <p:property name="x" value="200"></p:property>
+  <p:property name="b" ref="bref"></p:property>
+ </p:bean>
+ 
+ 
+ <p:bean class="practicSpr.Certi" name="cer">
+ <p:constructor-arg  value="Java Programmming Lang"></p:constructor-arg>
+ </p:bean>
+ 
+ <p:bean class="practicSpr.Person" name="per">
+  <p:constructor-arg value="Sakshi"></p:constructor-arg>
+  <p:constructor-arg value="20"></p:constructor-arg>
+  <p:constructor-arg ref="cer"></p:constructor-arg>
+  <p:constructor-arg >
+    <p:list>
+    
+    <p:value>Kushal</p:value>
+    <p:value>Vikram</p:value>
+    <p:value>Tanisha</p:value>
+    <p:value>Devika</p:value>
+    </p:list>
+  </p:constructor-arg>
+ </p:bean>
+ 
+
+</p:beans>
