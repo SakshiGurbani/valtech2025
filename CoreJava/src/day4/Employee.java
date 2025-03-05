@@ -26,7 +26,6 @@ public class Employee implements Comparable<Employee> {
 	
 	public static EmployeeBuilder builder() {
 		return new EmployeeBuilder(new Employee());
-		
 		//w/o this u need to create a employee object first then pass to string builder
 	}
 	
@@ -121,20 +120,15 @@ public class Employee implements Comparable<Employee> {
 			emp.setSalary(salary);
 			return this;
 		}
-		
 		public EmployeeBuilder gender(Gender gender) {
 			emp.setGender(gender);
 			return this;
 		}
-		
-		
 //		public EmployeeBuilder gender(String gender) {
 //			emp.setGender(Gender.valueOf(gender));
 //			return this;
 //		}
 //		
-		
-		
 		public EmployeeBuilder level(int level) {
 			emp.setLevel(level);
 			return this;
@@ -147,13 +141,7 @@ public class Employee implements Comparable<Employee> {
 			
 	
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	//To string
 	@Override
 	public String toString() {
@@ -174,8 +162,7 @@ public class Employee implements Comparable<Employee> {
 				.append(experience)
 				.toString();
 	}
-	
-	
+
     //hashcode
 	@Override
 	public int hashCode() {
@@ -202,16 +189,13 @@ public class Employee implements Comparable<Employee> {
 			return Integer.compare(this.level, e.level);
 		}
 		
-		
 		if(this.experience !=e.experience) {
 			return Integer.compare(this.experience, e.experience);
 		}
 		
-		
 		if(this.salary !=e.salary) {
 			return Float.compare(this.salary, e.salary);
 		}
-		
 		
 		return this.gender.compareTo(e.gender);
 	

@@ -9,8 +9,13 @@ http://www.springframework.org/schema/beans spring-beans-3.2.xsd ">
 	
 	<p:bean class="spring.files.CustomerHibernateDAOImpl"></p:bean>
 	<p:bean class="spring.files.CustomerServiceImpl"></p:bean>
+	<p:bean class="spring.files.OrderHibernateDAOImpl"></p:bean>
+	<!-- <p:bean class="spring.files.ItemHibernateDAOImpl"></p:bean> -->
+	<p:bean class="spring.files.LineItemsDAOImpl"></p:bean>
+	<p:bean class="spring.files.OrderServiceImpl"></p:bean> 
 	
 	<p:bean class="spring.files.ItemHibernateDAOImpl"></p:bean>
+	<!-- <p:bean class="spring.files."></p:bean> -->
 
 
 	<p:bean autowire="no"
@@ -19,6 +24,9 @@ http://www.springframework.org/schema/beans spring-beans-3.2.xsd ">
 			<p:list>
 				<p:value>spring.files.Customer</p:value>
 				<p:value>spring.files.Item</p:value>
+				<p:value>spring.files.Order</p:value>
+				<p:value>spring.files.LineItems</p:value>
+				
 
 			</p:list>
 		</p:property>

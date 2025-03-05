@@ -28,7 +28,6 @@ public class Employee implements Comparable<Employee> {
 	
 	public static EmployeeBuilder builder() {
 		return new EmployeeBuilder(new Employee());
-		
 		//w/o this u need to create a employee object first then pass to string builder
 	}
 	

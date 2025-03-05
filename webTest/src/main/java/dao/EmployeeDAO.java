@@ -17,7 +17,7 @@ public interface EmployeeDAO {
 	List<Employee> getEmployeeByDeptId(int deptId);
 	
 	
-	
+	//sorting
 	List<Employee> sortEmpById(String sortOrder);
 	List<Employee> sortEmpByName(String sortOrder);
 	List<Employee> sortEmpByAge(String sortOrder);

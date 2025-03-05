@@ -1,16 +1,21 @@
 package spring.files;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Item {
 	
-	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "itseq")
-	@SequenceGenerator(name= "itseq", sequenceName="it_seq",allocationSize = 1)
+	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "itemseq")
+	@SequenceGenerator(name= "itemseq", sequenceName="item_seq",allocationSize = 1)
 	private int itemId;
 	private String name;
 	private String descrip;
@@ -19,12 +24,12 @@ public class Item {
 	private int maxQuant;
 	
 	
+	@OneToMany(targetEntity = LineItems.class,cascade = CascadeType.ALL,mappedBy="item",fetch = FetchType.LAZY)
+	private Set<LineItems> lineItems;
+	
+	
 	public Item() {}
-	
-	
 	public Item( String name, String descrip, int currQuant, int reOrderQuant, int maxQuant) {
-		
-		
 		this.name = name;
 		this.descrip = descrip;
 		this.currQuant = currQuant;
@@ -32,6 +37,13 @@ public class Item {
 		this.maxQuant = maxQuant;
 	}
 
+	public void setLineItems(Set<LineItems> lineItems) {
+		this.lineItems = lineItems;
+	}
+	
+	public Set<LineItems> getLineItems() {
+		return lineItems;
+	}
 
 	public int getId() {
 		return itemId;

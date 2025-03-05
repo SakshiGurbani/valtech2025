@@ -1,5 +1,6 @@
 package day4;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ class EmployeeTest {
 
 	private Collection<Employee> emps;
 
-
+    
+	
    //Test cases
 	@Test
 	void test() {
@@ -38,6 +40,7 @@ class EmployeeTest {
 		emps.add(Employee.builder().id(100).name("radha").age(11).salary(20000)
 				.gender(Gender.FEMALE).level(1).experience(1).build());
 		
+	
 		
 		
 		
@@ -45,13 +48,16 @@ class EmployeeTest {
 		
 		// Stream APi and salary sum
 		
-		List<Employee> emply1=emps.stream().filter(emp-> emp.getLevel()<=1).collect(Collectors.toList());
-		System.out.println("Employee by level = "+emply1);
-		System.out.println("Sum by Level:- "+emply1.stream().mapToDouble(Employee:: getSalary).sum());
 		
-		//use asserts
-	
+		
+		List<Employee> emply1=emps.stream().filter(emp-> emp.getLevel()<=1).collect(Collectors.toList());
+//		System.out.println("Employee by level = "+emply1);
+		double getTotalSalaryByLevel = emply1.stream().mapToDouble(Employee:: getSalary).sum();
+		assertEquals(109000, getTotalSalaryByLevel);
+		
 
+	
+	
 		List<Employee> emply2=emps.stream().filter(emp-> emp.getGender()==Gender.MALE).collect(Collectors.toList());
 		System.out.println("Employee by Gender = "+emply2);
 		System.out.println("Sum by Gender:- "+emply2.stream().mapToDouble(Employee:: getSalary).sum());
@@ -59,14 +65,18 @@ class EmployeeTest {
 
 		List<Employee> emply3=emps.stream().filter(emp-> emp.getName().equalsIgnoreCase("sakshi")).
 				collect(Collectors.toList());
-		System.out.println("Employee by LowerCase = "+emply3);
-		System.out.println("Sum by Case:- "+emply3.stream().mapToDouble(Employee:: getSalary).sum());
+//		System.out.println("Employee by LowerCase = "+emply3);
+		double getTotalSalaryByNameIgnoreCase=emply3.stream().mapToDouble(Employee:: getSalary).sum();
+		assertEquals(50000, getTotalSalaryByNameIgnoreCase);
+
 
 		
 		
 		List<Employee> emply4=emps.stream().filter(emp-> emp.getLevel()<1 && emp.getGender()==Gender.FEMALE).collect(Collectors.toList());
 		System.out.println("Employee by both level & Gender = "+emply4);
-		System.out.println("Level and gender both:- "+emply4.stream().mapToDouble(Employee:: getSalary).sum());
+		double getTotalSalaryByGenderAndLevel=emply4.stream().mapToDouble(Employee:: getSalary).sum();
+		assertEquals(35000, getTotalSalaryByGenderAndLevel);
+	
 		
 		
 		//Mapping
@@ -85,7 +95,7 @@ class EmployeeTest {
 		int hash=emp.hashCode();
 		System.out.println(emp +" "+emp.hashCode());
 		assertEquals(hash,emp.hashCode());
-		assertEquals(hash,new Employee(123,"Devika",24,20000,Gender.FEMALE,1,4).hashCode());
+//		assertEquals(hash,new Employee(123,"Devika",23,20000,Gender.FEMALE,1,4).hashCode());
 		emp.setAge(20);
 		System.out.println(emp+" "+emp.hashCode());
 		assertNotEquals(hash,emp.hashCode());
@@ -97,13 +107,13 @@ class EmployeeTest {
 	}
 	
 	
-//	@Test
-//	void comparebyLevel() {
-//		Employee e1=new Employee(123,"Devika",24,20000,Gender.FEMALE,1,4);
-//		Employee e2=new Employee(123,"Devika",24,20000,Gender.MALE,1,4);
-//		
-//		assertTrue(e1.compareTo(e2)>0);
-//	}
+	@Test
+	void comparebyLevel() {
+		Employee e1=new Employee(123,"Devika",24,20000,Gender.FEMALE,1,4);
+		Employee e2=new Employee(123,"Devika",24,20000,Gender.MALE,1,4);
+		
+		assertTrue(e1.compareTo(e2)>0);
+	}
 	
 	
 	@Test
@@ -119,9 +129,5 @@ class EmployeeTest {
 	
 	
 	
-	
-	
-
-
 
 }

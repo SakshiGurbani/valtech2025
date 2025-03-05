@@ -1,17 +1,9 @@
 package spring.files;
 
-import java.util.List;
-
 public interface OrderService {
-	
-	void save(Order o);
 
-	void update(Order o);
+	void checkAndAddInventory(Item item);
 
-	void delete(int oid);
-
-	Order get(int oid);
-
-	List<Order> getAll();
+	void placeOrder(Order o);
 
 }

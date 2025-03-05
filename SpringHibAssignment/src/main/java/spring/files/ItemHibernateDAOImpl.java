@@ -5,12 +5,13 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-
+@Repository
 public class ItemHibernateDAOImpl implements ItemDAO{
 	
-	
+	@Autowired
 private SessionFactory sessionFactory;
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
