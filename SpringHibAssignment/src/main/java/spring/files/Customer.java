@@ -27,8 +27,7 @@ public class Customer {
 	private String address;
 	private String perAdd;
 	
-	@OneToMany(targetEntity = Order.class,mappedBy = "customer",cascade = CascadeType.ALL,fetch=FetchType.LAZY
-			)
+	@OneToMany(targetEntity = Order.class,mappedBy = "customer",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	 private Set<Order>orders;
 	
 	public enum CustomerStatus{
@@ -44,16 +43,15 @@ public class Customer {
 		this.customerStatus = customerStatus;
 	}
 	public Customer() {}
-	public Customer( String name, int age, String address, String perAdd) {
-	
+
+	public Customer(String name, int age, String address, String perAdd, 
+			CustomerStatus customerStatus) {
 		this.name = name;
 		this.age = age;
 		this.address = address;
 		this.perAdd = perAdd;
+		this.customerStatus = customerStatus;
 	}
-
-
-
 	public int getCid() {
 		return cid;
 	}
@@ -99,6 +97,7 @@ public class Customer {
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
+	
 	@Override
 	public String toString() {
 		return "Customer [cid=" + cid + ", name=" + name + ", age=" + age + ", address=" + address + ", perAdd="

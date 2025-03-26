@@ -13,8 +13,6 @@ import day4.Employee.Gender;
 public class EmployeeDAOImpl implements EmployeeDAO {
 	
 
-	
-
 	static {
 		try {
 			Class.forName("org.postgresql.Driver");

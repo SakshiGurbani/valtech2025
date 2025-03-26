@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<p:beans xmlns:p="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans-3.2.xsd ">
+<p:beans xmlns:p="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans-3.2.xsd ">
 
  <p:bean class="practicSpr.Child" name="child">
- <p:property name="id" value="1"></p:property>
- <p:property name="name" value="Sakshi"></p:property>
- <p:property name="place" value="Jaipur"></p:property>
+ <p:property name="id" value="2"></p:property>
+ <p:property name="name" value="Aryan"></p:property>
+ <p:property name="place" value="SriGanganagar"></p:property>
  </p:bean>
- 
- 
- <p:bean class="practicSpr.Emp" name="employee">
+
+
+  <p:bean class="practicSpr.Emp" name="employee">
    <p:property name="ename" value="Yashi"></p:property>
    
    <p:property name="phones">
@@ -36,13 +38,13 @@
     </p:map>
    </p:property>
    
-   <p:property name="props">
+  <p:property name="props">
    <p:props>
      <p:prop key="Cutesttttt "> Sakshi</p:prop>
-     <p:prop key="Pagal/Bevkoof "> Mr</p:prop>
+     <p:prop key="Pagal/Bevkoof "> You</p:prop>
    </p:props>
    </p:property>
- </p:bean>
+ </p:bean> 
  
  
  <p:bean class="practicSpr.B" name="bref">
@@ -74,5 +76,9 @@
   </p:constructor-arg>
  </p:bean>
  
+ <p:bean class="practicSpr.Addition" name="add">
+  <p:constructor-arg value="12" type="double" index="1"></p:constructor-arg>
+    <p:constructor-arg value="32" type="double" index="0"></p:constructor-arg>
+ </p:bean>
 
 </p:beans>

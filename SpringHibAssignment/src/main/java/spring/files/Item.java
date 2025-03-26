@@ -24,8 +24,8 @@ public class Item {
 	private int maxQuant;
 	
 	
-	@OneToMany(targetEntity = LineItems.class,cascade = CascadeType.ALL,mappedBy="item",fetch = FetchType.LAZY)
-	private Set<LineItems> lineItems;
+	@OneToMany(targetEntity = LineItem.class,cascade = CascadeType.ALL,mappedBy="item",fetch = FetchType.LAZY)
+	private Set<LineItem> lineItems;
 	
 	
 	public Item() {}
@@ -37,11 +37,11 @@ public class Item {
 		this.maxQuant = maxQuant;
 	}
 
-	public void setLineItems(Set<LineItems> lineItems) {
+	public void setLineItems(Set<LineItem> lineItems) {
 		this.lineItems = lineItems;
 	}
 	
-	public Set<LineItems> getLineItems() {
+	public Set<LineItem> getLineItems() {
 		return lineItems;
 	}
 

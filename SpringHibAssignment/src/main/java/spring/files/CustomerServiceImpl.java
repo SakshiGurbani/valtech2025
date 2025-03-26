@@ -22,11 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 		
 		@Override
 		@Transactional
-//		(propagation = Propagation.REQUIRED)
 		public void save(Customer c) {
 			customerDAO.save(c);
-//			throw new RuntimeException("Checking Rollback");
-//			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
+
 		}
        
 		
@@ -34,11 +32,10 @@ import org.springframework.transaction.annotation.Transactional;
 		@Transactional(propagation = Propagation.REQUIRED)
 		public void update(Customer c) {
 			customerDAO.update(c);
-//			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
+
 		}
       
 		@Override
-//		@Transactional(propagation = Propagation.REQUIRED)
 		public void delete(int cid) {
 			customerDAO.delete(cid);
 		}

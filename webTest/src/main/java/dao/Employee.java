@@ -166,12 +166,6 @@ public class Employee implements Comparable<Employee> {
 	
 	}
 	
-	
-	
-	
-	
-	
-	
 	//To string
 	@Override
 	public String toString() {

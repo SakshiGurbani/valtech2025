@@ -10,11 +10,12 @@ http://www.springframework.org/schema/beans spring-beans-3.2.xsd ">
 	<p:bean class="spring.files.CustomerHibernateDAOImpl"></p:bean>
 	<p:bean class="spring.files.CustomerServiceImpl"></p:bean>
 	<p:bean class="spring.files.OrderHibernateDAOImpl"></p:bean>
-	<!-- <p:bean class="spring.files.ItemHibernateDAOImpl"></p:bean> -->
-	<p:bean class="spring.files.LineItemsDAOImpl"></p:bean>
-	<p:bean class="spring.files.OrderServiceImpl"></p:bean> 
+    <p:bean class="spring.files.ItemHibernateDAOImpl"></p:bean>
+	<p:bean class="spring.files.LineItemDAOImpl"></p:bean>
+	<p:bean class="spring.files.OrderServiceImpl"></p:bean>
+	<p:bean class="spring.files.InventoryServiceImpl"></p:bean> 
 	
-	<p:bean class="spring.files.ItemHibernateDAOImpl"></p:bean>
+	<!-- <p:bean class="spring.files.ItemHibernateDAOImpl"></p:bean> -->
 	<!-- <p:bean class="spring.files."></p:bean> -->
 
 
@@ -25,7 +26,7 @@ http://www.springframework.org/schema/beans spring-beans-3.2.xsd ">
 				<p:value>spring.files.Customer</p:value>
 				<p:value>spring.files.Item</p:value>
 				<p:value>spring.files.Order</p:value>
-				<p:value>spring.files.LineItems</p:value>
+				<p:value>spring.files.LineItem</p:value>
 				
 
 			</p:list>

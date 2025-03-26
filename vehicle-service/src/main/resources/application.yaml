@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: QUESTION-SERVICE
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vehicle
+    username: postgres
+    password: postgress
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+
+server:
+  port: 9040	 

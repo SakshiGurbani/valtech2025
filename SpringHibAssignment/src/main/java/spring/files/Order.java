@@ -1,5 +1,6 @@
 package spring.files;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public class Order {
 	
 	
 	public enum Status{
-		ORDERED,PACKED,DELIVERED,NOTDELIVERED
+		ORDERED,PACKED,DELIVERED,REJECTED
 		
 	}
 	
@@ -31,26 +32,30 @@ public class Order {
 	@SequenceGenerator(name= "oseq", sequenceName="o_seq",allocationSize = 1)
 	private int orderId;
 	
+	
 	@ManyToOne(targetEntity = Customer.class,cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="cusid" ,referencedColumnName="cid")
 	private Customer customer;
 	
+	
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
-	@OneToMany(targetEntity = LineItems.class,mappedBy = "order",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	private Set<LineItems> lineItems;
+	@OneToMany(targetEntity = LineItem.class,mappedBy = "order",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	private Set<LineItem> lineItems;
 	
 	
 	
 	public Order() {}
 
-	public Order(int orderid, Status status, Customer customer, Set<LineItems> lineItems) {
-		this.orderId = orderId;
-		this.status = status;
+	public Order( Customer customer, Status status, Set<LineItem> lineItems) {
+	
 		this.customer = customer;
+		this.status = status;
 		this.lineItems = lineItems;
 	}
+
+
 
 
 
@@ -80,11 +85,11 @@ public class Order {
 
 
 
-	public Set<LineItems> getLineItems() {
+	public Set<LineItem> getLineItems() {
 		return lineItems;
 	}
 
-	public void setLineItems(Set<LineItems> lineItems) {
+	public void setLineItems(Set<LineItem> lineItems) {
 		this.lineItems = lineItems;
 	}
 
@@ -92,7 +97,17 @@ public class Order {
 		this.orderId = orderId;
 	}
 
+	public void addItems(LineItem li) {
+		if(lineItems==null) lineItems=new HashSet<LineItem>();
+		lineItems.add(li);
+		li.setOrder(this);
+		
+	}
 	
+	public void removeItems(LineItem li) {
+		lineItems.remove(li);
+		li.setOrder(null);
+	}
 
 	
 	

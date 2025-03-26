@@ -11,7 +11,6 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 
 @WebFilter(urlPatterns="/*")
-
 public class TimerFilter implements Filter {
 	
 	
