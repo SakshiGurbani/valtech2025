@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
+import com.valtech.training.resultservice.entities.Result;
+import com.valtech.training.resultservice.repos.ResultRepo;
 import com.valtech.training.resultservice.vos.ResultVO;
 
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional(propagation=Propagation.REQUIRED)
-public class ResultServiceImpl {
+public class ResultServiceImpl implements ResultService  {
    
 	@Autowired
 	private ResultRepo resultRepo;
@@ -24,6 +26,7 @@ public class ResultServiceImpl {
 	private QuestionClient questionClient;
 	
 	
+	@Override
 	public ResultVO testResults(int quizId) {
 		List<String> submittedAnswers=quizClient.getSubmittedAnswers(quizId);
 		List<Integer> quesIds=quizClient.getQuesIdsFromQuiz(quizId);
