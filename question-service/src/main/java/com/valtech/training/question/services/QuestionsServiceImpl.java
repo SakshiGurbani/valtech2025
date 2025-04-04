@@ -49,11 +49,11 @@ public class QuestionsServiceImpl implements QuestionsService  {
 		return QuestionsVO.from(questionsRepo.findRandomQuestionsByTopic(topic,number));
 	}
 	
-	@Override
-	public List<QuestionsVO>getQuestionsByListOfIds(List<Integer>ids){
-		return QuestionsVO.from(questionsRepo.findAllByIds(ids));
-	}
-	
+//	@Override
+//	public List<QuestionsVO>getQuestionsByListOfIds(List<Integer>ids){
+//		return QuestionsVO.from(questionsRepo.findAllByIds(ids));
+//	}
+//	
 	
 	
 	

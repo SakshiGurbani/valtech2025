@@ -138,11 +138,6 @@ public class Loan {
 	}
 
 
-//
-//	public Loan to() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-	
+
 
 }

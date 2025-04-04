@@ -29,6 +29,12 @@ public class QuestionClient{
 	}
 
 
+	public List<QuestionVO> getQuestionsByTopicFromQuestions(String topic) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 	
 }

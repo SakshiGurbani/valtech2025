@@ -45,11 +45,11 @@ public class QuestionsController {
 		return questionsService.getRandomQuestionByTopic(topic,number);
 	}
 	
-	@GetMapping("/ques/{ids}")
-	public List<QuestionsVO> getQuestionsByIds(@PathVariable("ids") String ids){
-		List<Integer>id=Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
-		return questionsService.getQuestionsByListOfIds(id);
-	}
+//	@GetMapping("/ques/{ids}")
+//	public List<QuestionsVO> getQuestionsByIds(@PathVariable("ids") String ids){
+//		List<Integer>id=Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+//		return questionsService.getQuestionsByListOfIds(id);
+//	}
 	
 	
 	@PostMapping("/")

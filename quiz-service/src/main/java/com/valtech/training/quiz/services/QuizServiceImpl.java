@@ -15,7 +15,7 @@ import com.valtech.training.quiz.vos.QuizVO;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class QuizServiceImpl implements QuizService {
+public class QuizServiceImpl {
 	
 	@Autowired
 	private QuizRepo quizRepo;

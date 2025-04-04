@@ -16,6 +16,6 @@ public interface QuestionsService {
 
 	List<QuestionsVO> getRandomQuestionByTopic(String topic, int number);
 
-	List<QuestionsVO> getQuestionsByListOfIds(List<Integer> ids);
+//	List<QuestionsVO> getQuestionsByListOfIds(List<Integer> ids);
 
 }
