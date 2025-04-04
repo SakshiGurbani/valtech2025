@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.valtech.training.quiz.entities.Quiz;
 
 @Repository
-public interface QuizRepo extends JpaRepository<Quiz,Long>{
+public interface QuizRepo extends JpaRepository<Quiz,Integer>{
 
 }

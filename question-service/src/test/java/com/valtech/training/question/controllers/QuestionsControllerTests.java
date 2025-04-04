@@ -1,7 +1,10 @@
 package com.valtech.training.question.controllers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,12 +12,16 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
+import com.valtech.training.question.services.QuestionsService;
 import com.valtech.training.question.vos.QuestionsVO;
 
 import java.util.List;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class QuestionsControllerTests {
+	
+	@Autowired
+	private QuestionsService questionsService;
 	
 	@LocalServerPort
 	private int port;
@@ -23,27 +30,29 @@ public class QuestionsControllerTests {
 	private TestRestTemplate restTemplate;
 	
 	@Test
-	void addQuestions() {
-		List ques=restTemplate.getForObject("http://localhost:"+port+"/api/v1/questions/", List.class);
-		if(ques.size()==0) {
-			System.out.println("Adding Questions");
-			QuestionsVO qvo=restTemplate.postForObject("http://localhost:"+port+"/api/v1/questions/",
-					new QuestionsVO
-					(1, "Who is the Prime Minister of India", "Shri Narendra Modi ", "Dr.rajendra Prasad",
-							"Sarojini naidu", "Shri Narendra Modi", "GK"), QuestionsVO.class);
-			
-			QuestionsVO qvo1=restTemplate.postForObject("http://localhost:"+port+"/api/v1/questions/",
-					new QuestionsVO
-					(2, "Who is the President of India", "Pratibha Patil ", "Smt Draupadi Murmu",
-							"Sarojini naidu", "Smt Draupadi Murmu", "GK"), QuestionsVO.class);
-
-			QuestionsVO qvo2=restTemplate.postForObject("http://localhost:"+port+"/api/v1/questions/",
-					new QuestionsVO
-					(0, "Who is the President of India", "Pratibha Patil ", "Smt Draupadi Murmu",
-							"Sarojini naidu", "Smt Draupadi Murmu", "GK"), QuestionsVO.class);
-			
-		}
+	public void testQuestion() {
+		assertEquals(6, questionsService.countByTopic("Java"));
 	}
+	
+	@BeforeEach
+	public void addQuestions() {
+		String url = "http://localhost:"+port+"/api/v1/questions/";
+		List questions = restTemplate.getForObject("http://localhost:"+port+"/api/v1/questions/", List.class);
+		if(questions.size()> 0) {
+//			System.out.println("Adding questions to DB");
+//			QuestionVO q1 = restTemplate.postForObject(url,
+//					new QuestionVO("How many methods are there in marker interface?","None","One","Two","Many","None","Java"), QuestionVO.class);
+//			QuestionVO q2 = restTemplate.postForObject(url,
+//					new QuestionVO("What is the superclass of Exception?","Object","Exception","Throwable","Error","Throwable","Java"), QuestionVO.class);
+//			QuestionVO q3 = restTemplate.postForObject(url,
+//					new Question("How many methods are there in functional interface?","None","One","Two","Many","None","Java"), QuestionVO.class);
+//			QuestionVO q4 = restTemplate.postForObject(url,
+//					new Question("Can Interface have private methods?","Yes","No","Maybe","No method can be there in an interface","Yes","Java"), QuestionVO.class);
+//			QuestionVO q5 = restTemplate.postForObject(url,		
+//					new Question("Which subclass of Exception is not checked by comliper?","Exception","RuntimeException","CompiletimeException","Error","RuntimeException","Java"), QuestionVO.class);
+		
+		}
+	} 
 	
 	
 

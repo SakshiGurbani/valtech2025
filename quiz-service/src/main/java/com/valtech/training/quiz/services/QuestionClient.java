@@ -13,27 +13,23 @@ import com.valtech.training.quiz.vos.QuestionVO;
 public class QuestionClient{
 	
 	
-	public List<QuestionVO> getAllQuestionByTopic(String topic,int number){
-		RestTemplate temp=new RestTemplate();
-		String urlForTopic="http://localhost:9030/api/v1/questions/random/"+topic+"/"+number;
-		List<QuestionVO> questions=Arrays.asList(temp.getForObject(urlForTopic, QuestionVO[].class));
+	String url = "http://localhost:9030/api/v1/questions/";
+	public List<QuestionVO> getQuestionsByTopicFromQuestion(String topic) {
+		RestTemplate temp = new RestTemplate();
+		String url1 = url+"topic/"+topic;
+		List<QuestionVO> questions = Arrays.asList(temp.getForObject(url1,QuestionVO[].class));
 		return questions;
 	}
+
+	public List<QuestionVO> getQuestionsByIds(List<Integer> questionsIds) {
 	
+		RestTemplate temp = new RestTemplate();
+		String url2 = url + "questions/"+questionsIds.stream().map(String::valueOf).collect(Collectors.joining(","));
+		
+		List<QuestionVO> questions = Arrays.asList(temp.getForObject(url2,QuestionVO[].class));
 
-	public List<QuestionVO> getQuestionsByIds(List<Integer>ids){
-		RestTemplate temp=new RestTemplate();
-		String urlForId= "http://localhost:9030/api/v1/question/ques/"+ids.stream().map(String::valueOf).collect(Collectors.joining(","));
-		List<QuestionVO> questions=Arrays.asList(temp.getForObject(urlForId, QuestionVO[].class));
 		return questions;
 	}
-
-
-	public List<QuestionVO> getQuestionsByTopicFromQuestions(String topic) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	
 	

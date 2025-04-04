@@ -6,16 +6,16 @@ import com.valtech.training.question.vos.QuestionsVO;
 
 public interface QuestionsService {
 
-	QuestionsVO saveOrUpdateQuestions(QuestionsVO qvo);
+	QuestionsVO saveOrUpdateQuestion(QuestionsVO qvo);
 
-	QuestionsVO getQuestionsById(long id);
+	QuestionsVO getQuestion(int id);
 
-	List<QuestionsVO> getQuestionByTopic(String topic);
+	List<QuestionsVO> getQuestions();
 
-	List<QuestionsVO> getAllQuestions();
+	List<QuestionsVO> getQuestionsFromTopic(String topic);
 
-	List<QuestionsVO> getRandomQuestionByTopic(String topic, int number);
+	Integer countByTopic(String string);
 
-//	List<QuestionsVO> getQuestionsByListOfIds(List<Integer> ids);
+	List<QuestionsVO> getQuestions(List<Integer> listint);
 
 }

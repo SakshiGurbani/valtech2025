@@ -24,37 +24,32 @@ public class QuestionsController {
 	@Autowired
 	private QuestionsService questionsService;
 	
+	@PostMapping("/")
+	public QuestionsVO createQuestion(@RequestBody QuestionsVO questionVO) {
+		return questionsService.saveOrUpdateQuestion(questionVO);
+	}
+	
 	@GetMapping("/{id}")
-	public QuestionsVO getQuestions(@PathVariable("id") long id) {
-		return questionsService.getQuestionsById(id);
+	public QuestionsVO getQuestion(@PathVariable("id") int id) {
+		return questionsService.getQuestion(id);
 	}
 	
 	@GetMapping("/")
-	public List<QuestionsVO> getAllQuestions() {
-		return questionsService.getAllQuestions();
+	public List<QuestionsVO> getAllQuestions(){
+		return questionsService.getQuestions();
 	}
-	
 	
 	@GetMapping("/topic/{topic}")
-	public List<QuestionsVO> getQuestionByTopic(@PathVariable("topic") String topic){
-		return questionsService.getQuestionByTopic(topic);
+	public List<QuestionsVO> getAllQuestionsByTopic(@PathVariable("topic") String topic){
+		return questionsService.getQuestionsFromTopic(topic);
 	}
-	
-	@GetMapping("/random/{topic}/{number}")
-	public List<QuestionsVO> getRandomQuestionByTopic(@PathVariable("topic") String topic, @PathVariable("number")int number){
-		return questionsService.getRandomQuestionByTopic(topic,number);
-	}
-	
-//	@GetMapping("/ques/{ids}")
-//	public List<QuestionsVO> getQuestionsByIds(@PathVariable("ids") String ids){
-//		List<Integer>id=Arrays.stream(ids.split(",")).map(Integer::parseInt).collect(Collectors.toList());
-//		return questionsService.getQuestionsByListOfIds(id);
-//	}
-	
-	
-	@PostMapping("/")
-	public QuestionsVO createQuestions(@RequestBody QuestionsVO questionsVO) {
-		return  questionsService.saveOrUpdateQuestions(questionsVO);
+	@GetMapping("/questions/{ids}")
+	public List<QuestionsVO> getQuestionsOfQuiz(@PathVariable("ids") String ids){
+		System.out.println("Inside Question controller............");
+		List<Integer> listint = Arrays.stream(ids.split(",")).map(Integer::parseInt)
+				.collect(Collectors.toList());
+		
+		return questionsService.getQuestions(listint);
 	}
 
 }

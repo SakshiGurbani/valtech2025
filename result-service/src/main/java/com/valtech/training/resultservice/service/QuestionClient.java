@@ -12,7 +12,7 @@ public class QuestionClient {
 	
 	public List<String> getAnswersFromQuestionIds(List<Integer> ids){
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:9030/api/v1/questions/questions/"+ids.stream().map(String::valueOf).collect(Collectors.joining(","));
+		String url = "http://localhost:9030/api/v1/questions/questions/"+id.stream().map(String::valueOf).collect(Collectors.joining(","));
 		List<QuestionsVO> questions = Arrays.asList(restTemplate.getForObject(url, QuestionsVO[].class));
 		List<String> correctAnswers = questions.stream().map(q->q.ans()).collect(Collectors.toList()));
 		return correctAnswers;

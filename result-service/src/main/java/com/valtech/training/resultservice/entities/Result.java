@@ -13,7 +13,7 @@ public class Result {
 	private int quizId;
 	private int score;
 	
-	private Result() {}
+	public Result() {}
 
 	public Result(int id, int quizId, int score) {
 		super();

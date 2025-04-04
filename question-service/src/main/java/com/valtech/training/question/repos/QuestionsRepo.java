@@ -11,10 +11,7 @@ import com.valtech.training.question.entities.Questions;
 
 @Repository
 public interface QuestionsRepo extends JpaRepository<Questions, Long> {
-	
 	List<Questions> findAllByTopic(String topic);
-	
-	@Query(value="SELECT * FROM question WHERE topic=:topic ORDER BY RANDOM()LIMIT :number",nativeQuery=true)
-	List<Questions> findRandomQuestionsByTopic(@Param("topic")String topic,@Param("number")int number);
 
+	Integer countByTopic(String topic);
 }

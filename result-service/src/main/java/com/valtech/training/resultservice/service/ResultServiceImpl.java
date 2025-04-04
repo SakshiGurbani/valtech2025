@@ -25,23 +25,26 @@ public class ResultServiceImpl implements ResultService  {
 	@Autowired
 	private QuestionClient questionClient;
 	
-	
 	@Override
 	public ResultVO testResults(int quizId) {
-		List<String> submittedAnswers=quizClient.getSubmittedAnswers(quizId);
-		List<Integer> quesIds=quizClient.getQuesIdsFromQuiz(quizId);
-		List<String> rightAnswers=questionClient.getAnswersFromQuestionIds(quesIds);
 		
-		int score=0;
-		for(int i=0;i<rightAnswers.size();i++) {
-			if(rightAnswers.get(i).equalsIgnoreCase(submittedAnswers.get(i)));
-			score++;
+		List<String> submittedAnswers = quizClient.getSubmittedAnswers(quizId);
+		List<Integer> qids = quizClient.getQuesIdsFromQuiz(quizId);
+		List<String> rightAnswers = questionClient.getAnswersFromQuestionIds(qids);
+		
+		int score = 0;
+		for(int i=0; i<rightAnswers.size();i++) {
+			if(rightAnswers.get(i).equalsIgnoreCase(submittedAnswers.get(i))) {
+				score++;
+			}
+			
 		}
-		Result res=new Result();
-		res.setQuizId(quizId);
-		res.setScore(score);
 		
+		Result result = new Result();
+		result.setQuizId(quizId);
+		result.setScore(score);
+
+		return ResultVO.from(resultRepo.save(result));
 		
-		return ResultVO.from(resultRepo.save(res));
 	}
 }

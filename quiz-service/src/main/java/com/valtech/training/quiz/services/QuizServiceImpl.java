@@ -1,5 +1,6 @@
 package com.valtech.training.quiz.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,63 +16,75 @@ import com.valtech.training.quiz.vos.QuizVO;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class QuizServiceImpl {
+public class QuizServiceImpl implements QuizService {
 	
 	@Autowired
 	private QuizRepo quizRepo;
 	
 	@Autowired
 	private QuestionClient questionClient;
+
 	
-	public QuizVO saveOrUpdateQuiz(QuizVO qvo) {
-		Quiz quiz =qvo.to();
-		String topic=quiz.getTopic();
-		int number=quiz.getNoOfQuestons();
-		List<QuestionVO> randomQuestions=questionClient.getAllQuestionByTopic(topic,number);
-		List<Integer> ids=randomQuestions.stream().map(q->q.id()).collect(Collectors.toList());
+	@Override
+	public QuizVO getQuiz(int id) {
+		Quiz quiz = quizRepo.getReferenceById(id);
+		return QuizVO.from(quizRepo.getReferenceById(id));
+	}
+	
+	
+
+
+	@Override
+	public QuizVO createQuiz(QuizVO qivo) { 
+		Quiz quiz = qivo.to();
+		String topic = quiz.getTopic();
 		
+		int noOfQuestions = quiz.getNoOfQuestions();
+		List<QuestionVO> allQuestions = questionClient.getQuestionsByTopicFromQuestion(topic);
+		
+		List<Integer> questionIds = getRandomQuestionIds(allQuestions,noOfQuestions);
 		quiz.setTopic(topic);
-		quiz.setNoOfQuestions(number);
-		quiz.setQuestionsId(ids);
-		quiz.setAnswer(qvo.answer());
+		quiz.setNoOfQuestions(noOfQuestions);
+		quiz.setQuestionsId(questionIds);
+		quiz.setAnswer(qivo.answer());
 		
-		return QuizVO.from(quizRepo.save(quiz));
-	}
-	
-	@Override
-	public List<QuestionVO> getQuestionsByTopicAndNumberOfQuestions(String topic,int numOfQuestions){
-		List<QuestionVO> allQuestions=questionClient.getQuestionsByTopicFromQuestions(topic)
-		
-		
-		
-	}
-	
-	@Override
-	public QuizVO getQuiz(long id) {
-		Quiz q= quizRepo.getReferenceById(id);
-		return QuizVO.from(q);
-	}
-	
-	@Override
-	public List<QuizVO> getAllQuiz(){
-		return quizRepo.findAll().stream().map(qu->QuizVO.from(qu)).collect(Collectors.toList());
-		
-	}
-	
-	@Override
-	public QuizVO saveQuiz(QuizVO qvo) {
-		Quiz q=qvo.to();
-		q=quizRepo.save(q);
-		return QuizVO.from(q);
-	}
-	
-	@Override
-	public QuizVO updateQuiz(long id,QuizVO qvo) {
-		Quiz q= quizRepo.getReferenceById(id);
-		qvo.update(q);
-		q=quizRepo.save(q);
-		return QuizVO.from(q);
-		
+		quiz = quizRepo.save(quiz);
+		return QuizVO.from(quiz);
 	}
 
+
+	@Override
+	public List<Integer> getRandomQuestionIds(List<QuestionVO> allQuestions, int noOfQuestions) {
+	
+		Collections.shuffle(allQuestions);
+		return allQuestions.stream().limit(noOfQuestions).map(QuestionVO::id).collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<QuestionVO> getQuesByTopicAndNoOfQue(String topic, int noOfQuestions){
+		List<QuestionVO> allQuestions = questionClient.getQuestionsByTopicFromQuestion(topic);
+		Collections.shuffle(allQuestions);
+		return allQuestions.stream().limit(noOfQuestions).collect(Collectors.toList());
+	} 
+	
+	@Override
+	public QuizVO takeQuiz(int quizId,List<String> answers) {
+		Quiz quiz = quizRepo.getReferenceById(quizId);
+		quiz.setAnswer(answers);
+		quiz = quizRepo.save(quiz);
+		return QuizVO.from(quiz);		
+	}
+	
+	@Override
+	public List<String> getAnswers (int id){
+		Quiz quiz = quizRepo.getReferenceById(id);
+		return quiz.getAnswer();
+	}
+	
+	@Override
+	public List<QuestionVO> getQuestionsByQuiz(int id){
+		Quiz quiz = quizRepo.getReferenceById(id);
+		return questionClient.getQuestionsByIds(quiz.getQuestionsId());
+	}
+	
 }

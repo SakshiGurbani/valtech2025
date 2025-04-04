@@ -16,42 +16,36 @@ import com.valtech.training.quiz.vos.QuestionVO;
 import com.valtech.training.quiz.vos.QuizVO;
 
 @RestController
-@RequestMapping("/api/v1/quiz")
+@RequestMapping("/api/v1/quizs")
 public class QuizController {
 	
+
 	@Autowired
 	private QuizService quizService;
 	
-	@GetMapping("/{id}")
-	public QuizVO getQuiz( @PathVariable("id")long id) {
-		return quizService.getQuiz(id);
-		
-	}
-	
-	@GetMapping("/")
-	public List<QuizVO> getAllQuizes(){
-		return quizService.getAllQuizes();
-	}
-	
-    @GetMapping("/quizId/{quizId}")
-	public List<QuestionVO> getQuestionsByQuiz(@PathVariable("quizId") int quizId){
-		return quizService.getQuestionsForQuiz(quizId);
-	}
-	
 	@PostMapping("/")
-	public QuizVO createQuiz(@RequestBody QuizVO qvo) {
-		return quizService.saveOrUpdateQuiz(qvo);
-		
+	public void createQuiz(@RequestBody QuizVO qivo) {
+		 quizService.createQuiz(qivo);
 	}
 	
-	
-	
-	
+	@GetMapping("/{id}")
+	public QuizVO getQuestion(@PathVariable("id") int id) {
+		return quizService.getQuiz(id);
+	}
+	@GetMapping("/{topic}/{noOfQuestions}")
+	public List<QuestionVO> getQuestions(@PathVariable("topic") String topic, @PathVariable("noOfQuestions") int noOfQuestions){
+		return quizService.getQuesByTopicAndNoOfQue(topic, noOfQuestions);
+	}
+	@GetMapping("/{quizId}/questions")
+	public List<QuestionVO> getQuestionsForQuiz(@PathVariable("quizId") int quizId){
+		return quizService.getQuestionsByQuiz(quizId);
+	}
+	@GetMapping("/answers/{id}")
+	public List<String> getAnswerById(@PathVariable("id") int id){
+		return quizService.getAnswers(id);
+	}
 	@PostMapping("/takequiz/{quizId}")
-	public QuizVO takeQuiz(@PathVariable ("quizId")int quizId,@RequestBody List<String> answers) {
-		return quizService.takeQuiz(quizId,answers);
+	public QuizVO takeQuiz(@PathVariable("quizId") int quizId,@RequestBody List<String> answers) {
+		return quizService.takeQuiz(quizId, answers);
 	}
-	
-	
-
 }

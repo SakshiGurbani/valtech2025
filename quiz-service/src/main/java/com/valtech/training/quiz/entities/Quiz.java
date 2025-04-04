@@ -17,8 +17,8 @@ public class Quiz {
 	
 	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "quiz_seq")
 	@SequenceGenerator(name="quiz_seq",sequenceName = "quiz_seq",allocationSize = 1)
-	private long id;
-	private long noOfQuestions;
+	private int id;
+	private int noOfQuestions;
 	private String topic;
 	
 	@ElementCollection()
@@ -36,14 +36,14 @@ public class Quiz {
 	
 	
 
-	public Quiz(long noOfQuestions, String topic) {
+	public Quiz(int noOfQuestions, String topic) {
 		super();
 		this.noOfQuestions = noOfQuestions;
 		this.topic = topic;
 	}
 	
 
-	public Quiz(long noOfQuestions, String topic, List<Integer> questionsId) {
+	public Quiz(int noOfQuestions, String topic, List<Integer> questionsId) {
 		super();
 		this.noOfQuestions = noOfQuestions;
 		this.topic = topic;
@@ -52,7 +52,7 @@ public class Quiz {
 
 
 
-	public Quiz(long noOfQuestions, String topic, List<String> answer, List<Integer> questionsId) {
+	public Quiz(int noOfQuestions, String topic, List<String> answer, List<Integer> questionsId) {
 		
 		this.noOfQuestions = noOfQuestions;
 		this.topic = topic;
@@ -66,15 +66,15 @@ public class Quiz {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public long getNoOfQuestions() {
+	public int getNoOfQuestions() {
 		return noOfQuestions;
 	}
 
-	public void setNoOfQuestions(long noOfQuestions) {
+	public void setNoOfQuestions(int noOfQuestions) {
 		this.noOfQuestions = noOfQuestions;
 	}
 

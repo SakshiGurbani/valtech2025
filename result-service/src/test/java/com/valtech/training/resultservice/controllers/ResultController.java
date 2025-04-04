@@ -23,8 +23,8 @@ public class ResultController {
 	
 	@Test
 	void test() {
-		String url = "http://localhost:"+port+"/api/v1/results/12";	
+		String url = "http://localhost:"+port+"/api/v1/results/28";	
 		ResultVO resultVO = restTemplate.getForObject(url, ResultVO.class);
+//		assertEquals(1, resultVO.score());
 		}
-
 }

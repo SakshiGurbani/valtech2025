@@ -20,42 +20,33 @@ public class QuestionsServiceImpl implements QuestionsService  {
 	@Autowired
 	private QuestionsRepo questionsRepo;
 	
+
 	@Override
-	public QuestionsVO saveOrUpdateQuestions(QuestionsVO qvo) {
-	  return QuestionsVO.from(questionsRepo.save(qvo.to()));
-		
+	public QuestionsVO saveOrUpdateQuestion(QuestionsVO qvo) {
+		return QuestionsVO.from(questionsRepo.save(qvo.to()));
 	}
-	
-	
-	
-	
 	@Override
-	public QuestionsVO getQuestionsById(long id) {
+	public QuestionsVO getQuestion(int id) {
 		return QuestionsVO.from(questionsRepo.getReferenceById(id));
 	}
-	
 	@Override
-	public List<QuestionsVO>getQuestionByTopic(String topic){
+	public List<QuestionsVO> getQuestions(){
+		return QuestionsVO.from(questionsRepo.findAll());
+	}
+	@Override
+	public List<QuestionsVO> getQuestionsFromTopic(String topic){
 		return QuestionsVO.from(questionsRepo.findAllByTopic(topic));
 	}
-	
 	@Override
-	public List<QuestionsVO> getAllQuestions(){
-		return questionsRepo.findAll().stream().map(qe->QuestionsVO.from(qe)).collect(Collectors.toList());
+	public Integer countByTopic(String topic) {
+		return questionsRepo.countByTopic(topic);
 	}
-	
 	@Override
-	public List<QuestionsVO>getRandomQuestionByTopic(String topic,int number){
-		return QuestionsVO.from(questionsRepo.findRandomQuestionsByTopic(topic,number));
+	public List<QuestionsVO> getQuestions(List<Integer> listint) {
+		List<Questions> qs = questionsRepo.findAllById(listint);
+	
+		return qs.stream().map(q -> QuestionsVO.from(q)).collect(Collectors.toList());
 	}
-	
-//	@Override
-//	public List<QuestionsVO>getQuestionsByListOfIds(List<Integer>ids){
-//		return QuestionsVO.from(questionsRepo.findAllByIds(ids));
-//	}
-//	
-	
-	
 	
 	
 	
